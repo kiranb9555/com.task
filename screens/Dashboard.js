@@ -133,7 +133,10 @@ t_id:1,
   ,]
 
   function Dashboard() {
-    const [value, setValue] = useState(true);
+    const [value, setValue] = useState(tasks);
+    const updatetask=async=(index1,value)=>{
+setValue(prev=>{return prev.map((item,index)=>index===index1?{...item,status:value}:item)})
+    }
     return (
       <View>
         <View  style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
@@ -143,15 +146,15 @@ t_id:1,
         </View>
         {
          
-          tasks.map((item, index) => (
+          value.map((item, index) => (
             <View key={index} style={{flexDirection:'row',justifyContent:'space-around'}}>
               <Text>{item.task_name}</Text>
               <Text>{item.task_description}</Text>
               <Text>{item.task_name}</Text>
               <CheckBox
                 disabled={false}
-                value={false}
-                onValueChange={(value) => { tasks[index].status = value, console.log(tasks[index]); setValue(!value) }
+                value={item.status}
+                onValueChange={(value) => { updatetask(index,value) }
                  
                 }
               />
