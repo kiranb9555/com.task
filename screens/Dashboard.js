@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, Button } from 'react-native'
 import CheckBox from '@react-native-community/checkbox';
+
+
 const tasks=[{
 t_id:1,
 
@@ -131,6 +133,7 @@ t_id:1,
   ,]
 
   function Dashboard() {
+    const [value, setValue] = useState(true);
     return (
       <View>
         <View  style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
@@ -146,13 +149,11 @@ t_id:1,
               <Text>{item.task_description}</Text>
               <Text>{item.task_name}</Text>
               <CheckBox
-                disabled={true}
-                value={item.status}
-                // onValueChange={(value) =>
-                //   this.setState({
-                //     value0: value,
-                //   })
-                // }
+                disabled={false}
+                value={false}
+                onValueChange={(value) => { tasks[index].status = value, console.log(tasks[index]); setValue(!value) }
+                 
+                }
               />
             </View>
           ))
